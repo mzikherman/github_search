@@ -5,8 +5,8 @@ class ReposController < ApplicationController
   # GET /repos.json
   def index
     
-    if (term = params[:term])
-      @repos = Repo.search_readme term
+    if (@term = params[:term])
+      @repos = Repo.search_readme @term
     else
       @repos = Repo.all
     end
