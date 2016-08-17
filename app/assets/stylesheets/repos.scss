@@ -1,3 +1,22 @@
 // Place all the styles related to the Repos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.repos-list {
+  > li {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+    p.details {
+      display: inline-block;
+    }
+  }
+}
+
+h1.repos-title {
+  padding-left: 25px;
+}
+
+input {
+  margin-left: 25px;
+}

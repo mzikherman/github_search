@@ -12,6 +12,11 @@ p, ol, ul, td {
   line-height: 18px;
 }
 
+ul {
+  list-style: none;
+  padding-left: 25px;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;

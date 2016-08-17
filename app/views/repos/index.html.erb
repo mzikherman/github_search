@@ -1,26 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= "Listing Repos#{@term ? ' That Match "' : ''}#{@term ? @term + '"': ''}" %></h1>
+<h1 class='repos-title'><%= "Listing Repos#{@term ? ' That Match "' : ''}#{@term ? @term + '"': ''}" %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Readme</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= text_field_tag 'term', @term, placeholder: 'Enter search term' %>
+<%= tag 'input', type: 'button', value: 'Search', onclick: "term=$('input').val();window.location='/repos?term='+term" %>
 
-  <tbody>
-    <% @repos.each do |repo| %>
-      <tr>
-        <td><%= repo.name %></td>
-        <td><%= repo.description %></td>
-        <td><%= markdown(repo.readme) %></td>
-        <td><%= link_to 'Show', repo %></td>
-        <td><%= link_to 'Edit', edit_repo_path(repo) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class='repos-list'>
+  <% @repos.each do |repo| %>
+    <li>
+      <div>
+        <strong>Name: </strong><a href=<%= "https://github.com/artsy/#{repo.name}" %>><p class='details'><%= repo.name %></p></a>
+        <br>
+        <strong>Description: </strong><p class='details'><%= repo.description %></p><br>
+        <p class='details'><%= markdown(truncate(repo.readme, length: 1000)) %><p>
+      </div>
+    </li>
+  <% end %>
+</ul>
