@@ -2,7 +2,7 @@
 
 <h1 class='repos-title'><%= "Listing Repos#{@term ? ' That Match "' : ''}#{@term ? @term + '"': ''}" %></h1>
 
-<%= text_field_tag 'term', @term, placeholder: 'Enter search term' %>
+<%= text_field_tag 'term', @term, placeholder: 'Enter search term', onkeydown: "if (event.keyCode == 13) { $(\'input[type=button]\').click(); }" %>
 <%= tag 'input', type: 'button', value: 'Search', onclick: "term=$('input').val();window.location='/repos?term='+term" %>
 
 <ul class='repos-list'>
@@ -12,8 +12,13 @@
         <strong>Name: </strong><a href=<%= "https://github.com/artsy/#{repo.name}" %>><p class='details'><%= repo.name %></p></a>
         <br>
         <strong>Description: </strong><p class='details'><%= repo.description %></p>
-        <div class='details'><%= markdown(truncate(repo.readme, length: 1000), repo.name) %><div>
+        <div class='details'><%= markdown(repo.readme, repo.name) %><div>
       </div>
     </li>
   <% end %>
 </ul>
+
+<script>
+  GithubSearch = {}
+  GithubSearch.term = '<%= @term %>'
+</script>
